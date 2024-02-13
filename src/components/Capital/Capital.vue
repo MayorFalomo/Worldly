@@ -1,6 +1,8 @@
 <template>
   <div class="capitalCon">
-    <p>What is the capital of {{ country[countryIndex].name }} ?</p>
+    <p>
+      {{ numbered }}. What is the capital of {{ country[countryIndex]?.name }} ?
+    </p>
     <p>{{ compute }}</p>
     <form @submit.prevent="getAnswer">
       <input
@@ -32,10 +34,11 @@ export default {
     score: Number,
     attempts: Number,
     answer: String,
+    numbered: Number,
   },
   setup(props, { emit }) {
     //First Split a string into an array
-    const splitted = ref(props.country[props.countryIndex].capital);
+    const splitted = ref(props.country[props.countryIndex]?.capital);
     const localAnswer = ref("");
 
     let randomNum1;
@@ -43,19 +46,19 @@ export default {
     let random1;
     let random2;
 
-    // console.log(props.country[props.countryIndex].name, "name index");
+    console.log(props.country[props.countryIndex]?.capital, "name index");
     // console.log(props.disableBtn, "disabled");
 
     const getAnswer = () => {
       console.log(props.answer.toLowerCase(), "answer");
       console.log(
-        props.country[props.countryIndex].capital.toLowerCase(),
+        props.country[props.countryIndex]?.capital.toLowerCase(),
         "name index"
       );
 
       if (
         props.answer.toLowerCase() ==
-        props.country[props.countryIndex].capital.toLowerCase()
+        props.country[props.countryIndex]?.capital.toLowerCase()
       ) {
         //If you want to emit, emit what you passed as a prop, then pass how you want to update the value of what you want to emit
         emit("correct", props.score + 1);
@@ -76,10 +79,10 @@ export default {
       // return arr.sort(() => Math.random() - 0.5);
       console.log(props.countryIndex, "indexes");
       function randomNumbers(string) {
-        randomNum1 = Math.floor(Math.random() * string.length);
-        randomNum2 = Math.floor(Math.random() * string.length);
+        randomNum1 = Math.floor(Math.random() * string?.length);
+        randomNum2 = Math.floor(Math.random() * string?.length);
         while (randomNum2 == randomNum1) {
-          randomNum2 = Math.floor(Math.random() * string.length);
+          randomNum2 = Math.floor(Math.random() * string?.length);
         }
         if (randomNum1 > randomNum2) {
           let temp = randomNum1;
@@ -97,18 +100,18 @@ export default {
       // console.log(random1, random2, "random");
 
       const slicedText =
-        splitted.value.slice(0, random1) +
+        splitted.value?.slice(0, random1) +
         "_" +
-        splitted.value.slice(random1 + 1, random2) +
+        splitted.value?.slice(random1 + 1, random2) +
         "_" +
-        splitted.value.slice(random2 + 1);
+        splitted.value?.slice(random2 + 1);
       return slicedText;
     });
 
     watch(
       () => props.countryIndex,
       (newVal) => {
-        splitted.value = props.country[newVal].capital;
+        splitted.value = props.country[newVal]?.capital;
       }
       // () => props.answer,
       // (newValue) => {

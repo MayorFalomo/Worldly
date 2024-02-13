@@ -1,5 +1,5 @@
 <template>
-  <div class="capitalsCon">
+  <div v-if="!showResults" class="capitalsCon">
     <Navbar :country="countryData" :score="score" :attempts="attempts" />
     <Capital
       :country="countryData"
@@ -11,6 +11,7 @@
       :attempts="attempts"
       :answer="answer"
       @update-answer="updateAnswer"
+      :numbered="numbered"
     />
     <Footer
       :countryData="countryData"
@@ -19,7 +20,11 @@
       :storedIndex="storedIndex"
       @correct="correctAnswer"
       :answer="answer"
+      :numbered="numbered"
     />
+  </div>
+  <div v-else>
+    <Results :score="score" />
   </div>
 </template>
 
@@ -29,14 +34,18 @@ import { useRouter, useRoute } from "vue-router";
 import Navbar from "../components/Navbar/Navbar.vue";
 import Capital from "../components/Capital/Capital.vue";
 import Footer from "../components/Footer/Footer.vue";
+import Results from "../components/Results/Results.vue";
 import axios from "axios";
+
 export default {
   name: "Capitals",
   components: {
     Navbar,
     Capital,
     Footer,
+    Results,
   },
+
   setup() {
     const score = ref(0);
     const attempts = ref(0);
@@ -45,8 +54,8 @@ export default {
     const storedIndex = ref(0);
     const disableBtn = ref(false);
     const answer = ref("");
-    const router = useRouter();
-    const route = useRoute();
+    const numbered = ref(1);
+    const showResults = ref(false);
 
     const fetchCountries = async () => {
       try {
@@ -75,9 +84,11 @@ export default {
     const nextCountry = (index) => {
       countryIndex.value = index;
       answer.value = "";
+      attempts.value = 0;
       disableBtn.value = false;
-      if (countryIndex.value > 10) {
-        router.push({ name: "Score", params: { score: score.value } });
+      numbered.value += 1;
+      if (numbered.value > 10) {
+        showResults.value = true;
       }
     };
 
@@ -99,6 +110,7 @@ export default {
       attempts.value = index;
       if (attempts.value > 2) {
         disableBtn.value = true;
+
         countryIndex.value = Math.floor(
           Math.random() * (storedIndex.value - 1)
         );
@@ -127,6 +139,8 @@ export default {
       disableBtn,
       answer,
       updateAnswer,
+      numbered,
+      showResults,
       // getCountries,
     };
   },

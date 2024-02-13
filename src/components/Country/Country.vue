@@ -1,7 +1,7 @@
 <template>
-  <div class="countryCon">
+  <div :id="darkmode" class="countryCon">
     <div class="flag">
-      <img :src="country[countryIndex].flag" alt="img" />
+      <img :src="country[countryIndex]?.flag" alt="img" />
     </div>
     <p>{{ compute }}</p>
     <form @submit.prevent="getAnswer">
@@ -33,29 +33,30 @@ export default {
     score: Number,
     attempts: Number,
     answer: String,
+    darkmode: String,
   },
   setup(props, { emit }) {
     //First Split a string into an array
-    const splitted = ref(props.country[props.countryIndex].name);
+    const splitted = ref(props.country[props.countryIndex]?.name);
     const localAnswer = ref("");
 
     let randomNum1;
     let randomNum2;
     let random1;
     let random2;
-    console.log(props.country[props.countryIndex].name, "name index");
+    console.log(props.country[props.countryIndex]?.name, "name index");
     console.log(props.disableBtn, "disabled");
 
     const getAnswer = () => {
       console.log(props.answer.toLowerCase(), "answer");
       console.log(
-        props.country[props.countryIndex].name.toLowerCase(),
+        props.country[props.countryIndex]?.name.toLowerCase(),
         "name index"
       );
 
       if (
         props.answer.toLowerCase() ==
-        props.country[props.countryIndex].name.toLowerCase()
+        props.country[props.countryIndex]?.name.toLowerCase()
       ) {
         //If you want to emit, emit what you passed as a prop, then pass how you want to update the value of what you want to emit
         emit("correct", props.score + 1);
@@ -83,10 +84,10 @@ export default {
       // return arr.sort(() => Math.random() - 0.5);
       console.log(props.countryIndex, "indexes");
       function randomNumbers(string) {
-        randomNum1 = Math.floor(Math.random() * string.length);
-        randomNum2 = Math.floor(Math.random() * string.length);
+        randomNum1 = Math.floor(Math.random() * string?.length);
+        randomNum2 = Math.floor(Math.random() * string?.length);
         while (randomNum2 == randomNum1) {
-          randomNum2 = Math.floor(Math.random() * string.length);
+          randomNum2 = Math.floor(Math.random() * string?.length);
         }
         if (randomNum1 > randomNum2) {
           let temp = randomNum1;
@@ -104,18 +105,18 @@ export default {
       // console.log(random1, random2, "random");
 
       const slicedText =
-        splitted.value.slice(0, random1) +
+        splitted.value?.slice(0, random1) +
         "_" +
-        splitted.value.slice(random1 + 1, random2) +
+        splitted.value?.slice(random1 + 1, random2) +
         "_" +
-        splitted.value.slice(random2 + 1);
+        splitted.value?.slice(random2 + 1);
       return slicedText;
     });
 
     watch(
       () => props.countryIndex,
       (newVal) => {
-        splitted.value = props.country[newVal].name;
+        splitted.value = props.country[newVal]?.name;
       }
     );
     return {
@@ -136,6 +137,7 @@ export default {
   justify-content: center;
   gap: 20px;
 }
+
 .flag {
   width: 100%;
   height: 200px;
@@ -147,7 +149,13 @@ img {
 }
 p {
   font-size: 24px;
+  /* color: #40e9f1; */
+}
+#dark p {
   color: #40e9f1;
+}
+#light p {
+  color: #000;
 }
 form {
   display: flex;
@@ -170,9 +178,23 @@ button {
   font-size: 18px;
   border-radius: 8px;
   border: none;
+  cursor: pointer;
+}
+#dark button {
   background-color: #0c233d;
   color: #40e9f1;
-  cursor: pointer;
+}
+#light button {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #000;
+  transition: 0.4s ease-in-out;
+}
+#light button:hover {
+  color: #000;
+  background-color: #adadad;
+  border: 1px solid #000;
+  transition: 0.4s ease-in-out;
 }
 </style>
 

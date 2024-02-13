@@ -1,13 +1,13 @@
 <template>
-  <div class="footerContainer">
+  <div :id="darkmode" class="footerContainer">
     <button>Show</button>
-    <p>Player</p>
+    <h2>Player</h2>
     <button @click="next">Skip</button>
   </div>
 </template>
 
 <script>
-import { ref, watch } from "vue";
+import { ref } from "vue";
 export default {
   name: "Footer",
   props: {
@@ -15,6 +15,7 @@ export default {
     countryIndex: Number,
     storedIndex: Number,
     numbered: Number,
+    darkmode: String,
   },
   setup(props, { emit }) {
     const index = ref(0);
@@ -41,25 +42,61 @@ export default {
   width: 100%;
   padding: 20px;
   /* height: 10%; */
-  background-color: #0d2f5f;
   /* background-color: #2c3e50; */
-  color: white;
+  /* color: white; */
   padding: 10px;
   /* position: fixed;
   bottom: 0;
   left: 0; */
   /* border-top: 1px solid #42b983; */
 }
+#light {
+  background-color: #adadad97;
+  color: #000;
+}
+#dark {
+  background-color: #0d2f5f;
+  color: #fff;
+}
 button {
   padding: 8px 15px;
   font-size: 20px;
   cursor: pointer;
+  border-radius: 7px;
+}
+#dark button {
   background-color: #0e3f6f;
   color: #3bf1fe;
   border: #52a5be;
+  transition: 0.4s ease-in-out;
 }
-p {
-  font-size: 24px;
+#dark button:hover {
+  background-color: transparent;
+  color: #3bf1fe;
+  border: 1px #52a5be solid;
+  transition: 0.4s ease-in-out;
+}
+#light button {
+  background-color: #000;
+  color: #fff;
+  /* border: #fff 1px solid; */
+  transition: 0.4s ease-in-out;
+}
+#light button:hover {
+  background-color: #fff;
+  color: #000;
+  border: #000 1px solid;
+  transition: 0.4s ease-in-out;
+}
+
+h2 {
+  font-size: 28px;
+  /* color: #3bf1fe; */
+}
+#light h2 {
+  color: #000;
+}
+#dark h2 {
   color: #3bf1fe;
 }
 </style>

@@ -6,13 +6,13 @@ export default {
   name: "Results",
   props: {
     score: Number,
+    darkmode: String,
   },
   components: {
     LottieAnimation,
     Vue3Lottie,
   },
   setup() {
-    console.log(DogJSON);
     return {
       DogJSON,
     };
@@ -21,7 +21,7 @@ export default {
 </script>
 
 <template>
-  <div class="scoreCon">
+  <div :id="darkmode" class="scoreCon">
     <div class="scoreTexts">
       <h1>Player Mayowa, your Score is {{ score }} / 10</h1>
       <router-link to="/">Play Again</router-link>
@@ -39,7 +39,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+#dark {
   background-color: #0c1526;
+}
+#light {
+  background-color: #fff;
 }
 .scoreTexts {
   display: flex;
@@ -52,11 +57,19 @@ h1 {
   text-align: center;
   color: #f9af5a;
 }
+#light h1 {
+  color: #0c1526;
+  background-color: #fff;
+  text-align: center;
+}
 .animation {
   position: fixed;
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
   z-index: 1;
+}
+.scoreCon a {
+  color: #000;
 }
 </style>

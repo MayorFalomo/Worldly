@@ -1,6 +1,13 @@
 <template>
-  <div v-if="!showResults" class="flagsCon">
-    <Navbar :country="countryData" :score="score" :attempts="attempts" />
+  <div v-if="!showResults" :id="darkmode" class="flagsCon">
+    <Navbar
+      :country="countryData"
+      :score="score"
+      :attempts="attempts"
+      :darkmode="darkmode"
+      :switchMode="switchMode"
+      @switchBg="switchBg"
+    />
     <div>
       <Country
         :country="countryData"
@@ -12,6 +19,7 @@
         :attempts="attempts"
         :answer="answer"
         @update-answer="updateAnswer"
+        :darkmode="darkmode"
       />
     </div>
     <div></div>
@@ -23,10 +31,11 @@
       @correct="correctAnswer"
       :answer="answer"
       :numbered="numbered"
+      :darkmode="darkmode"
     />
   </div>
   <div v-else>
-    <Results :score="score" />
+    <Results :score="score" :darkmode="darkmode" />
   </div>
 </template>
 
@@ -35,7 +44,7 @@ import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import Navbar from "../components/Navbar/Navbar.vue";
 import Footer from "../components/Footer/Footer.vue";
-import Results from "../components/results/Results.vue";
+import Results from "../components/Results/Results.vue";
 import Country from "../components/Country/Country.vue";
 import axios from "axios";
 export default {
@@ -57,6 +66,8 @@ export default {
     const router = useRouter();
     const numbered = ref(1);
     const showResults = ref(false);
+    const darkmode = ref("dark");
+    const switchMode = ref(false);
 
     const fetchCountries = async () => {
       try {
@@ -74,9 +85,9 @@ export default {
         countryData.value = [...countryData.value, ...countriesWithId];
         // console.log(countryData.value.length, "length");
         countryIndex.value = Math.floor(
-          Math.random() * (countryData.value.length - 1)
+          Math.random() * (countryData.value?.length - 1)
         );
-        storedIndex.value = countryData.value.length;
+        storedIndex.value = countryData.value?.length;
         // console.log(storedIndex.value, "data");
       } catch (error) {
         console.log(error);
@@ -87,12 +98,11 @@ export default {
     const nextCountry = (index) => {
       countryIndex.value = index;
       answer.value = "";
+      attempts.value = 0;
       disableBtn.value = false;
       numbered.value += 1;
-      console.log(numbered.value, "numbered");
       if (numbered.value > 10) {
         showResults.value = true;
-        // router.push({ name: "Score", params: { score: score.value } });
       }
     };
 
@@ -130,6 +140,12 @@ export default {
       answer.value = newAnswer;
     };
 
+    const switchBg = (bgMode) => {
+      darkmode.value = bgMode;
+      switchMode.value = !switchMode.value;
+      localStorage.setItem("mode", bgMode);
+    };
+
     return {
       score,
       attempts,
@@ -146,6 +162,9 @@ export default {
       numbered,
       showResults,
       Results,
+      switchMode,
+      darkmode,
+      switchBg,
       // getCountries,
     };
   },
@@ -153,8 +172,8 @@ export default {
     this.fetchCountries();
   },
   mounted() {
-    // this.getCountries();
-    // console.log(this.countryData);
+    // const newMode = localStorage.getItem("mode");
+    // darkmode.value = newMode;
   },
 };
 </script>
@@ -167,8 +186,13 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: #0c1526;
   /* border: 2px red solid; */
   overflow: hidden;
+}
+#dark {
+  background-color: #0c1526;
+}
+#light {
+  background-color: #fff;
 }
 </style>

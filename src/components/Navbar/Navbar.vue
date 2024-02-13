@@ -1,13 +1,18 @@
 <template>
-  <nav>
+  <nav :id="darkmode">
     <h1>Worldly</h1>
     <ul>
       <li>Score {{ score }}</li>
       <li>attempts {{ attempts }}</li>
     </ul>
     <div class="userPrefs">
-      <router-link to="/"><span> Home</span></router-link>
-      <span> moon </span>
+      <router-link to="/">Home</router-link>
+      <span @click="switchBgMode('light')" v-if="!switchMode">
+        <Icon icon="noto:sun" width="30" height="30" />
+      </span>
+      <span @click="switchBgMode('dark')" v-else>
+        <Icon icon="entypo:moon" width="30" height="30" />
+      </span>
       <div class="userDp">
         <img src="./personOne.jpg" alt="img" />
       </div>
@@ -16,36 +21,71 @@
 </template>
 
 <script>
+import { Icon } from "@iconify/vue";
+
 export default {
   name: "Navbar",
   props: {
     score: Number,
     attempts: Number,
+    darkmode: String,
+    switchMode: true,
   },
-  components: {},
-  setup() {
-    return {};
+  components: {
+    Icon,
+  },
+  setup(props, { emit }) {
+    const switchBgMode = (bgMode) => {
+      emit("switchBg", `${bgMode}`);
+    };
+
+    console.log(props.darkmode, "darkmode");
+    return {
+      switchBgMode,
+    };
   },
 };
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Abel&family=Alata&family=Archivo&family=Barlow:wght@600&family=Cabin:wght@500&family=Cinzel:wght@500;800&family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Gilda+Display&family=Inclusive+Sans&family=Inter:wght@400;600&family=Josefin+Sans:wght@300;400;600&family=Lato:wght@400;700&family=League+Spartan:wght@400;500;700&family=Manrope:wght@300&family=Maven+Pro&family=Merriweather:wght@700&family=Montserrat:ital,wght@0,400;0,600;0,700;1,500&family=Nanum+Gothic&family=Nunito&family=Nunito+Sans:opsz@6..12&family=Open+Sans:ital,wght@0,400;0,500;0,700;1,600&family=Patrick+Hand&family=Playfair+Display:wght@500&family=Poppins&family=Rajdhani:wght@500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:wght@300;400&family=Saira&family=Ubuntu:wght@300;500;700&family=Unica+One&family=Varela&family=Varela+Round&display=swap");
+
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #16386e;
-  color: white;
-  width: 100%;
-  /* position: fixed;
-  top: 0;
-  left: 0; */
   z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  /* background-color: #16386e; */
+  color: #000;
+  font-size: 18px;
+  width: 100%;
+  font-size: "Cinzel";
 }
-h1 {
+
+#dark {
+  background-color: #16386e;
+}
+#light {
+  background-color: #adadad;
+}
+#light h1 {
+  font-size: 35px;
+  color: #16386e;
+}
+#dark h1 {
   font-size: 35px;
   color: #f9af5a;
+}
+#light a {
+  color: black;
+}
+#dark a {
+  color: white;
 }
 ul {
   display: flex;
@@ -53,9 +93,16 @@ ul {
   gap: 20px;
 }
 
-li {
+#light li {
   list-style: none;
   font-size: 20px;
+  /* color: #000; */
+}
+#dark li {
+  list-style: none;
+  font-size: 20px;
+  color: #fff;
+  font-family: "Alata";
 }
 
 .userPrefs {
@@ -70,5 +117,10 @@ img {
   width: 50px;
   height: 50px;
   object-fit: cover;
+}
+
+.userPrefs span {
+  cursor: pointer;
+  font-family: "Alata";
 }
 </style>
