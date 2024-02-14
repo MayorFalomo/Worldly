@@ -152,6 +152,6 @@ export default {
   justify-content: space-between;
   background-color: #0c1526; */
   /* border: 7px green solid; */
-  overflow: hidden;
+  overflow-y: auto;
 }
 </style>
