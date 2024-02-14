@@ -47,16 +47,7 @@ export default {
     let random1;
     let random2;
 
-    // console.log(props.country[props.countryIndex]?.capital, "name index");
-    // console.log(props.disableBtn, "disabled");
-
     const getAnswer = () => {
-      // console.log(props.answer.toLowerCase(), "answer");
-      // console.log(
-      //   props.country[props.countryIndex]?.capital.toLowerCase(),
-      //   "name index"
-      // );
-
       if (
         props.answer.toLowerCase() ==
         props.country[props.countryIndex]?.capital.toLowerCase()
@@ -78,7 +69,6 @@ export default {
     //Using Computed property
     const compute = computed(() => {
       // return arr.sort(() => Math.random() - 0.5);
-      // console.log(props.countryIndex, "indexes");
       function randomNumbers(string) {
         randomNum1 = Math.floor(Math.random() * string?.length);
         randomNum2 = Math.floor(Math.random() * string?.length);
@@ -97,8 +87,6 @@ export default {
       }
 
       const { random1, random2 } = randomNumbers(splitted.value);
-
-      // console.log(random1, random2, "random");
 
       const slicedText =
         splitted.value?.slice(0, random1) +
