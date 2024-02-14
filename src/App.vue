@@ -114,9 +114,9 @@ export default {
 </script>
 
 <template>
-  <!-- <div class="app"> -->
-  <router-view />
-  <!-- <Navbar :country="countryData" :score="score" :attempts="attempts" />
+  <div class="app">
+    <router-view />
+    <!-- <Navbar :country="countryData" :score="score" :attempts="attempts" />
     <div>
       <Country
         :country="countryData"
@@ -139,19 +139,19 @@ export default {
       @correct="correctAnswer"
       :answer="answer"
     /> -->
-  <!-- </div> -->
+  </div>
 </template>
 
 <style scoped>
 .app {
   height: 100vh;
   width: 100vw;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: #0c1526;
-  /* border: 2px red solid; */
+  background-color: #0c1526; */
+  /* border: 7px green solid; */
   overflow: hidden;
 }
 </style>

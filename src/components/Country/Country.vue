@@ -7,7 +7,7 @@
     <form @submit.prevent="getAnswer">
       <input
         type="text"
-        placeholder="Enter country name"
+        placeholder="Enter the country name"
         v-model.trim="localAnswer"
         @input="emitUpdateAnswer"
       />

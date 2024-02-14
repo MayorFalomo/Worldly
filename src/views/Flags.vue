@@ -1,41 +1,43 @@
 <template>
-  <div v-if="!showResults" :id="darkmode" class="flagsCon">
-    <Navbar
-      :country="countryData"
-      :score="score"
-      :attempts="attempts"
-      :darkmode="darkmode"
-      :switchMode="switchMode"
-      @switchBg="switchBg"
-    />
-    <div>
-      <Country
+  <div :id="darkmode" class="flagsCon">
+    <div class="subFlagsCon" v-if="!showResults">
+      <Navbar
         :country="countryData"
-        :countryIndex="countryIndex"
-        @correct="correctAnswer"
-        @wrong="wrongAnswer"
-        :disableBtn="disableBtn"
         :score="score"
         :attempts="attempts"
+        :darkmode="darkmode"
+        :switchMode="switchMode"
+        @switchBg="switchBg"
+      />
+      <div>
+        <Country
+          :country="countryData"
+          :countryIndex="countryIndex"
+          @correct="correctAnswer"
+          @wrong="wrongAnswer"
+          :disableBtn="disableBtn"
+          :score="score"
+          :attempts="attempts"
+          :answer="answer"
+          @update-answer="updateAnswer"
+          :darkmode="darkmode"
+        />
+      </div>
+      <div></div>
+      <Footer
+        :countryData="countryData"
+        :countryIndex="countryIndex"
+        @nextCountry="nextCountry"
+        :storedIndex="storedIndex"
+        @correct="correctAnswer"
         :answer="answer"
-        @update-answer="updateAnswer"
+        :numbered="numbered"
         :darkmode="darkmode"
       />
     </div>
-    <div></div>
-    <Footer
-      :countryData="countryData"
-      :countryIndex="countryIndex"
-      @nextCountry="nextCountry"
-      :storedIndex="storedIndex"
-      @correct="correctAnswer"
-      :answer="answer"
-      :numbered="numbered"
-      :darkmode="darkmode"
-    />
-  </div>
-  <div v-else>
-    <Results :score="score" :darkmode="darkmode" />
+    <div v-else>
+      <Results :score="score" :darkmode="darkmode" />
+    </div>
   </div>
 </template>
 
@@ -169,15 +171,22 @@ export default {
 
 <style>
 .flagsCon {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
+
+  /* border: 2px red solid; */
+  /* overflow: hidden; */
+}
+.subFlagsCon {
+  /* border: 2px blue solid; */
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  /* border: 2px red solid; */
-  overflow: hidden;
 }
+
 #dark {
   background-color: #0c1526;
 }

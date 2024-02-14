@@ -2,7 +2,7 @@
   <div :id="darkmode" class="footerContainer">
     <button>Show</button>
     <h2>Player</h2>
-    <button @click="next">Skip</button>
+    <button @click="next">Next</button>
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 20px;
+  padding: 30px;
   font-family: "Alata";
   /* height: 10%; */
   /* background-color: #2c3e50; */
