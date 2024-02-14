@@ -8,10 +8,10 @@
     <div class="userPrefs">
       <router-link to="/">Home</router-link>
       <span @click="switchBgMode('light')" v-if="!switchMode">
-        <Icon icon="noto:sun" width="30" height="30" />
+        <Icon icon="noto:sun" />
       </span>
       <span @click="switchBgMode('dark')" v-else>
-        <Icon icon="entypo:moon" width="30" height="30" />
+        <Icon icon="entypo:moon" />
       </span>
       <div class="userDp">
         <img src="./personOne.jpg" alt="img" />
@@ -59,12 +59,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
   padding: 10px;
   /* background-color: #16386e; */
   color: #000;
   font-size: 18px;
   width: 100%;
-  font-size: "Cinzel";
+  font-family: "Alata";
 }
 
 #dark {
@@ -80,12 +81,15 @@ nav {
 #dark h1 {
   font-size: 35px;
   color: #f9af5a;
+  font-family: "Open Sans";
 }
 #light a {
   color: black;
+  font-family: "Open Sans";
 }
 #dark a {
   color: white;
+  font-family: "Open Sans";
 }
 ul {
   display: flex;
@@ -112,7 +116,6 @@ ul {
 }
 
 img {
-  /* width: 100%; */
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -122,5 +125,40 @@ img {
 .userPrefs span {
   cursor: pointer;
   font-family: "Alata";
+}
+
+@media (max-width: 550px) {
+  nav {
+    width: 100vw !important;
+    overflow: auto !important;
+  }
+  nav h1 {
+    font-size: 25px !important;
+  }
+  ul {
+    gap: 5px !important;
+  }
+  li {
+    list-style: none;
+    display: flex !important;
+    align-items: center;
+    gap: 3px;
+    font-size: 16px !important;
+  }
+  a {
+    font-size: 16px !important;
+  }
+  img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+  }
+  .userPrefs {
+    gap: 10px !important;
+  }
+  .userPrefs span {
+    font-size: 18px !important;
+  }
 }
 </style>

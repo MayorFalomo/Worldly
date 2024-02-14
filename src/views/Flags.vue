@@ -171,9 +171,10 @@ export default {
   created() {
     this.fetchCountries();
   },
-  mounted() {
-    // const newMode = localStorage.getItem("mode");
-    // darkmode.value = newMode;
+  onMounted() {
+    const newMode = localStorage.getItem("mode") || "";
+    console.log(newMode, "newMode");
+    darkmode.value = newMode;
   },
 };
 </script>
