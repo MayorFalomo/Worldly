@@ -1,39 +1,41 @@
 <template>
-  <div v-if="!showResults" class="capitalsCon">
-    <Navbar
-      :country="countryData"
-      :score="score"
-      :attempts="attempts"
-      :darkmode="darkmode"
-      :switchMode="switchMode"
-      @switchBg="switchBg"
-    />
-    <Capital
-      :country="countryData"
-      :countryIndex="countryIndex"
-      @correct="correctAnswer"
-      @wrong="wrongAnswer"
-      :disableBtn="disableBtn"
-      :score="score"
-      :attempts="attempts"
-      :answer="answer"
-      @update-answer="updateAnswer"
-      :numbered="numbered"
-      :darkmode="darkmode"
-    />
-    <Footer
-      :countryData="countryData"
-      :countryIndex="countryIndex"
-      @nextCountry="nextCountry"
-      :storedIndex="storedIndex"
-      @correct="correctAnswer"
-      :answer="answer"
-      :numbered="numbered"
-      :darkmode="darkmode"
-    />
-  </div>
-  <div v-else>
-    <Results :score="score" :darkmode="darkmode" />
+  <div :id="darkmode" class="capitalsCon">
+    <div class="subFlagsCon" v-if="!showResults">
+      <Navbar
+        :country="countryData"
+        :score="score"
+        :attempts="attempts"
+        :darkmode="darkmode"
+        :switchMode="switchMode"
+        @switchBg="switchBg"
+      />
+      <Capital
+        :country="countryData"
+        :countryIndex="countryIndex"
+        @correct="correctAnswer"
+        @wrong="wrongAnswer"
+        :disableBtn="disableBtn"
+        :score="score"
+        :attempts="attempts"
+        :answer="answer"
+        @update-answer="updateAnswer"
+        :numbered="numbered"
+        :darkmode="darkmode"
+      />
+      <Footer
+        :countryData="countryData"
+        :countryIndex="countryIndex"
+        @nextCountry="nextCountry"
+        :storedIndex="storedIndex"
+        @correct="correctAnswer"
+        :answer="answer"
+        :numbered="numbered"
+        :darkmode="darkmode"
+      />
+    </div>
+    <div v-else>
+      <Results :score="score" :darkmode="darkmode" />
+    </div>
   </div>
 </template>
 
@@ -174,15 +176,25 @@ export default {
 
 <style>
 .capitalsCon {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #0c1526; */
+  /* border: 2px red solid; */
+  overflow: hidden;
+}
+.subFlagsCon {
+  /* border: 2px blue solid; */
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: #0c1526;
-  /* border: 2px red solid; */
-  overflow: hidden;
+  overflow-y: auto;
 }
 #dark {
   background-color: #0c1526;

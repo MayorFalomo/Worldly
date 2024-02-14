@@ -144,7 +144,8 @@ export default {
 
 <style scoped>
 .app {
-  height: 100vh;
+  height: 100vh !important;
+  max-height: 100vh !important;
   width: 100vw;
   /* display: flex;
   flex-direction: column;
