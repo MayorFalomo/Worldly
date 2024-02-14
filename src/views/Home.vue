@@ -1,7 +1,7 @@
 <template>
   <div class="homeCon">
     <div class="choiceCon">
-      <h1>Choose</h1>
+      <h1>Choose One</h1>
       <div class="choiceBtn">
         <router-link to="/flags"><button>Flags</button></router-link>
         <router-link to="/capitals"><button>Capital</button></router-link>

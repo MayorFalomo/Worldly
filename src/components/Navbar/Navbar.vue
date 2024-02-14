@@ -2,8 +2,12 @@
   <nav :id="darkmode">
     <h1>Worldly</h1>
     <ul>
-      <li>Score {{ score }}</li>
-      <li>attempts {{ attempts }}</li>
+      <li>
+        Score: <span>{{ score }}</span>
+      </li>
+      <li>
+        Attempts: <span> {{ attempts }} </span>
+      </li>
     </ul>
     <div class="userPrefs">
       <router-link to="/">Home</router-link>
@@ -39,7 +43,7 @@ export default {
       emit("switchBg", `${bgMode}`);
     };
 
-    console.log(props.darkmode, "darkmode");
+    // console.log(props.darkmode, "darkmode");
     return {
       switchBgMode,
     };
@@ -125,25 +129,32 @@ img {
 .userPrefs span {
   cursor: pointer;
   font-family: "Alata";
+  font-size: 22px;
 }
 
 @media (max-width: 550px) {
   nav {
-    width: 100vw !important;
+    gap: 20px !important;
     overflow: auto !important;
+  }
+  nav::-webkit-scrollbar {
+    width: 0;
   }
   nav h1 {
     font-size: 25px !important;
   }
   ul {
-    gap: 5px !important;
-  }
-  li {
-    list-style: none;
     display: flex !important;
     align-items: center;
-    gap: 3px;
+    gap: 10px !important;
+  }
+  ul li {
+    list-style: none;
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
     font-size: 16px !important;
+    width: fit-content;
   }
   a {
     font-size: 16px !important;
@@ -155,10 +166,12 @@ img {
     object-fit: cover;
   }
   .userPrefs {
+    display: flex !important;
+    align-items: center !important;
     gap: 10px !important;
   }
   .userPrefs span {
-    font-size: 18px !important;
+    font-size: 20px !important;
   }
 }
 </style>

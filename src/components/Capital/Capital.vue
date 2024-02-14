@@ -1,5 +1,5 @@
 <template>
-  <div class="capitalCon">
+  <div :id="darkmode" class="capitalCon">
     <p>
       {{ numbered }}. What is the capital of {{ country[countryIndex]?.name }} ?
     </p>
@@ -35,6 +35,7 @@ export default {
     attempts: Number,
     answer: String,
     numbered: Number,
+    darkmode: String,
   },
   setup(props, { emit }) {
     //First Split a string into an array
@@ -50,11 +51,11 @@ export default {
     // console.log(props.disableBtn, "disabled");
 
     const getAnswer = () => {
-      console.log(props.answer.toLowerCase(), "answer");
-      console.log(
-        props.country[props.countryIndex]?.capital.toLowerCase(),
-        "name index"
-      );
+      // console.log(props.answer.toLowerCase(), "answer");
+      // console.log(
+      //   props.country[props.countryIndex]?.capital.toLowerCase(),
+      //   "name index"
+      // );
 
       if (
         props.answer.toLowerCase() ==
@@ -77,7 +78,7 @@ export default {
     //Using Computed property
     const compute = computed(() => {
       // return arr.sort(() => Math.random() - 0.5);
-      console.log(props.countryIndex, "indexes");
+      // console.log(props.countryIndex, "indexes");
       function randomNumbers(string) {
         randomNum1 = Math.floor(Math.random() * string?.length);
         randomNum2 = Math.floor(Math.random() * string?.length);

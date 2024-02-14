@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import Navbar from "../components/Navbar/Navbar.vue";
 import Footer from "../components/Footer/Footer.vue";
@@ -145,7 +145,10 @@ export default {
       switchMode.value = !switchMode.value;
       localStorage.setItem("mode", bgMode);
     };
-
+    onMounted(() => {
+      const newMode = localStorage.getItem("mode") || "";
+      darkmode.value = newMode;
+    });
     return {
       score,
       attempts,
@@ -170,11 +173,6 @@ export default {
   },
   created() {
     this.fetchCountries();
-  },
-  onMounted() {
-    const newMode = localStorage.getItem("mode") || "";
-    console.log(newMode, "newMode");
-    darkmode.value = newMode;
   },
 };
 </script>

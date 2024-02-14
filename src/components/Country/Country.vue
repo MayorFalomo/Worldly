@@ -7,7 +7,7 @@
     <form @submit.prevent="getAnswer">
       <input
         type="text"
-        placeholder="Enter country"
+        placeholder="Enter country name"
         v-model="localAnswer"
         @input="emitUpdateAnswer"
       />
@@ -48,11 +48,11 @@ export default {
     console.log(props.disableBtn, "disabled");
 
     const getAnswer = () => {
-      console.log(props.answer.toLowerCase(), "answer");
-      console.log(
-        props.country[props.countryIndex]?.name.toLowerCase(),
-        "name index"
-      );
+      // console.log(props.answer.toLowerCase(), "answer");
+      // console.log(
+      //   props.country[props.countryIndex]?.name.toLowerCase(),
+      //   "name index"
+      // );
 
       if (
         props.answer.toLowerCase() ==
@@ -82,7 +82,7 @@ export default {
     //Using Computed property
     const compute = computed(() => {
       // return arr.sort(() => Math.random() - 0.5);
-      console.log(props.countryIndex, "indexes");
+      // console.log(props.countryIndex, "indexes");
       function randomNumbers(string) {
         randomNum1 = Math.floor(Math.random() * string?.length);
         randomNum2 = Math.floor(Math.random() * string?.length);

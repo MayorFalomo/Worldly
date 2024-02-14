@@ -1,6 +1,13 @@
 <template>
   <div v-if="!showResults" class="capitalsCon">
-    <Navbar :country="countryData" :score="score" :attempts="attempts" />
+    <Navbar
+      :country="countryData"
+      :score="score"
+      :attempts="attempts"
+      :darkmode="darkmode"
+      :switchMode="switchMode"
+      @switchBg="switchBg"
+    />
     <Capital
       :country="countryData"
       :countryIndex="countryIndex"
@@ -12,6 +19,7 @@
       :answer="answer"
       @update-answer="updateAnswer"
       :numbered="numbered"
+      :darkmode="darkmode"
     />
     <Footer
       :countryData="countryData"
@@ -21,10 +29,11 @@
       @correct="correctAnswer"
       :answer="answer"
       :numbered="numbered"
+      :darkmode="darkmode"
     />
   </div>
   <div v-else>
-    <Results :score="score" />
+    <Results :score="score" :darkmode="darkmode" />
   </div>
 </template>
 
@@ -56,6 +65,8 @@ export default {
     const answer = ref("");
     const numbered = ref(1);
     const showResults = ref(false);
+    const darkmode = ref("dark");
+    const switchMode = ref(false);
 
     const fetchCountries = async () => {
       try {
@@ -116,15 +127,23 @@ export default {
         );
         disableBtn.value = false;
         attempts.value = 0;
-        console.log(countryIndex.value, "wrong");
+        // console.log(countryIndex.value, "wrong");
       }
-      // countryIndex.value = Math.floor(
-      //   Math.random() * (countryData.value.length - 1)
-      // );
     };
     const updateAnswer = (newAnswer) => {
       answer.value = newAnswer;
     };
+
+    const switchBg = (bgMode) => {
+      darkmode.value = bgMode;
+      switchMode.value = !switchMode.value;
+      localStorage.setItem("mode", bgMode);
+    };
+
+    onMounted(() => {
+      const newMode = localStorage.getItem("mode") || "";
+      darkmode.value = newMode;
+    });
 
     return {
       score,
@@ -141,15 +160,14 @@ export default {
       updateAnswer,
       numbered,
       showResults,
-      // getCountries,
+      switchMode,
+      darkmode,
+      switchBg,
     };
   },
+
   created() {
     this.fetchCountries();
-  },
-  mounted() {
-    // this.getCountries();
-    // console.log(this.countryData);
   },
 };
 </script>
@@ -165,5 +183,11 @@ export default {
   background-color: #0c1526;
   /* border: 2px red solid; */
   overflow: hidden;
+}
+#dark {
+  background-color: #0c1526;
+}
+#light {
+  background-color: #fff;
 }
 </style>

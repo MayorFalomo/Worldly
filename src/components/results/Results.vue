@@ -69,7 +69,10 @@ h1 {
   top: 50%;
   z-index: 1;
 }
-.scoreCon a {
+#dark a {
+  color: #fff;
+}
+#light a {
   color: #000;
 }
 </style>
