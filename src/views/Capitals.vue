@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import Navbar from "../components/Navbar/Navbar.vue";
 import Capital from "../components/Capital/Capital.vue";

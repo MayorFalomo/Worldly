@@ -8,7 +8,7 @@
       <input
         type="text"
         placeholder="Enter country name"
-        v-model="localAnswer"
+        v-model.trim="localAnswer"
         @input="emitUpdateAnswer"
       />
       <button
@@ -36,24 +36,16 @@ export default {
     darkmode: String,
   },
   setup(props, { emit }) {
-    //First Split a string into an array
-    const splitted = ref(props.country[props.countryIndex]?.name);
-    const localAnswer = ref("");
+    const splitted = ref(props.country[props.countryIndex]?.name); //Name of the country
+    const localAnswer = ref(""); //Gets the answer in the input locally
 
     let randomNum1;
     let randomNum2;
     let random1;
     let random2;
-    console.log(props.country[props.countryIndex]?.name, "name index");
-    console.log(props.disableBtn, "disabled");
 
     const getAnswer = () => {
-      // console.log(props.answer.toLowerCase(), "answer");
-      // console.log(
-      //   props.country[props.countryIndex]?.name.toLowerCase(),
-      //   "name index"
-      // );
-
+      //Check if the answer is correct
       if (
         props.answer.toLowerCase() ==
         props.country[props.countryIndex]?.name.toLowerCase()
@@ -67,6 +59,7 @@ export default {
       }
     };
 
+    //Watch the answer prop and update the local answer value when it changes
     watch(
       () => props.answer,
       (newValue) => {
@@ -79,10 +72,9 @@ export default {
       emit("update-answer", localAnswer.value);
     };
 
-    //Using Computed property
+    //Using Computed property to run a function that chooses a random number from a string based on the length of the string it receives
     const compute = computed(() => {
       // return arr.sort(() => Math.random() - 0.5);
-      // console.log(props.countryIndex, "indexes");
       function randomNumbers(string) {
         randomNum1 = Math.floor(Math.random() * string?.length);
         randomNum2 = Math.floor(Math.random() * string?.length);
@@ -102,8 +94,7 @@ export default {
 
       const { random1, random2 } = randomNumbers(splitted.value);
 
-      // console.log(random1, random2, "random");
-
+      //This function receives a random number from the randomNumbers function then slices from 0 to the randomNumber then add _ then slices again from the second random number then concatenates and like that
       const slicedText =
         splitted.value?.slice(0, random1) +
         "_" +
@@ -113,6 +104,7 @@ export default {
       return slicedText;
     });
 
+    //Watch function from vue here watches the props.countryIndex for changes and if it changes it sets the splitted value to the name of the current country
     watch(
       () => props.countryIndex,
       (newVal) => {

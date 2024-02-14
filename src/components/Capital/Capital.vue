@@ -8,7 +8,7 @@
       <input
         type="text"
         placeholder="Enter country"
-        v-model="localAnswer"
+        v-model.trim="localAnswer"
         @input="emitUpdateAnswer"
       />
       <button
@@ -47,7 +47,7 @@ export default {
     let random1;
     let random2;
 
-    console.log(props.country[props.countryIndex]?.capital, "name index");
+    // console.log(props.country[props.countryIndex]?.capital, "name index");
     // console.log(props.disableBtn, "disabled");
 
     const getAnswer = () => {

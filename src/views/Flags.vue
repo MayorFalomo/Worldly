@@ -107,20 +107,11 @@ export default {
     };
 
     const correctAnswer = (index) => {
-      console.log(index, "emitted");
       score.value = index;
       disableBtn.value = true;
-      console.log(answer, "Answer");
-      if (score.value > 0) {
-        console.log(disableBtn.value, "disable");
-      }
-      // countryIndex.value = Math.floor(
-      //   Math.random() * (countryData.value.length - 1)
-      // );
     };
 
     const wrongAnswer = (index) => {
-      console.log(index, "emitted");
       attempts.value = index;
       if (attempts.value > 2) {
         disableBtn.value = true;
@@ -130,7 +121,6 @@ export default {
         disableBtn.value = false;
         attempts.value = 0;
         numbered.value += 1;
-        console.log(countryIndex.value, "wrong");
       }
       // countryIndex.value = Math.floor(
       //   Math.random() * (countryData.value.length - 1)

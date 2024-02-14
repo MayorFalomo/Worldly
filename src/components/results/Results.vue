@@ -23,7 +23,11 @@ export default {
 <template>
   <div :id="darkmode" class="scoreCon">
     <div class="scoreTexts">
-      <h1>Player Mayowa, your Score is {{ score }} / 10</h1>
+      <h1 v-if="score > 7">Congrats! Player, your Score is {{ score }} / 10</h1>
+      <h1 v-else-if="score == 5 || score == 6">
+        Not bad! Player, your Score is {{ score }} / 10
+      </h1>
+      <h1 v-else>Terrible Player!, your Score is {{ score }} / 10</h1>
       <router-link to="/">Play Again</router-link>
       <div v-if="score >= 7" class="animation">
         <Vue3Lottie :animationData="DogJSON" :height="200" :width="200" />
@@ -71,8 +75,12 @@ h1 {
 }
 #dark a {
   color: #fff;
+  position: relative;
+  z-index: 3;
 }
 #light a {
   color: #000;
+  position: relative;
+  z-index: 3;
 }
 </style>
