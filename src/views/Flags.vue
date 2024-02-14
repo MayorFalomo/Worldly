@@ -44,7 +44,7 @@ import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import Navbar from "../components/Navbar/Navbar.vue";
 import Footer from "../components/Footer/Footer.vue";
-import Results from "../components/Results/Results.vue";
+import Results from "../components/results/Results.vue";
 import Country from "../components/Country/Country.vue";
 import axios from "axios";
 export default {
