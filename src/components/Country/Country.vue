@@ -142,7 +142,7 @@ export default {
 }
 
 .flag {
-  width: 100%;
+  width: 95%;
   height: 200px;
 }
 img {
@@ -207,7 +207,7 @@ button {
 
 @media (max-width: 650px) {
   .flag {
-    width: 100%;
+    width: 90%;
     height: 150px;
   }
   p {

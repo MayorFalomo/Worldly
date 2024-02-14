@@ -18,7 +18,10 @@
         <Icon icon="entypo:moon" />
       </span>
       <div class="userDp">
-        <img src="./personOne.jpg" alt="img" />
+        <img
+          src="https://i.pinimg.com/564x/33/f4/d8/33f4d8c6de4d69b21652512cbc30bb05.jpg"
+          alt="img"
+        />
       </div>
     </div>
   </nav>
