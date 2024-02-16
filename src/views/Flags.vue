@@ -173,9 +173,6 @@ export default {
 .flagsCon {
   height: 100%;
   width: 100%;
-
-  /* border: 2px red solid; */
-  /* overflow: hidden; */
 }
 .subFlagsCon {
   /* border: 2px blue solid; */
